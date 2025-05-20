@@ -1,7 +1,8 @@
 /* Game Class Starter File
- * Authors: Joel A. Bianchi
- * Last Edit: 5/15/25
- * Updated to Java version
+ * Authors: Marcus, Thomas, Taha, 
+ * Last Edit: 5/20/25
+ * using new Screen show method
+ * Eliminate usage of currentWorld & currentGrid
  */
 
 //import processing.sound.*;
@@ -38,8 +39,9 @@ public class Game extends PApplet{
   PImage player1;   // Use PImage to display the image in a GridLocation
   int player1Row = 3;
   int player1Col = 0;
-  int player2Row = 5;
-  int player2Col = 5;
+  String player2File = "images/yellowhorse.png";
+  int player2Row = 0;
+  int player2Col = 2;
   int health = 3;
   AnimatedSprite player2;
   Button b1;
@@ -61,8 +63,6 @@ public class Game extends PApplet{
 
   // VARIABLES: Tracking the current Screen being displayed
   Screen currentScreen;
-  World currentWorld;
-  Grid currentGrid;
   private int msElapsed = 0;
 
   boolean start = true;
@@ -102,25 +102,25 @@ public class Game extends PApplet{
     //SETUP: Screens, Worlds, Grids
     splashScreen = new Screen(this, "splash", splashBg);
     level1Grid = new Grid(this, "chessBoard", level1Bg, 6, 8);
-    //level1Grid.startPrintingGridMarks();
+    // level1Grid.startPrintingGridMarks();
     level2World = new World(p, "sky", level2Bg, 4.0f, 0.0f, -800.0f); //moveable World constructor --> defines center & scale (x, scale, y)???
     System.out.println( "World constructed: " + Util.toStringPImage(level2World.getBgImage()));
        
     // level2World = new World("sky", level2Bg);   //non-moving World construtor
-    endScreen = new World(this, "end", endBg);
+    endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
     //SETUP: All Game objects
-    runningHorse = new AnimatedSprite(this, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 10.0f);
+    runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 10.0f);
 
     //SETUP: Level 1
     player1 = p.loadImage(player1File);
     player1.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-    player2 = new AnimatedSprite(this, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
+    player2 = new AnimatedSprite(p, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
     player2.resize(50, 50);
     level1Grid.setTileSprite(new GridLocation (player2Row, player2Col), player2);
 
-    b1 = new Button(this, "rect", 625, 525, 150, 50, "GoTo Level 2");
+    b1 = new Button(p, "rect", 625, 525, 150, 50, "GoTo Level 2");
     // b1.setFontStyle("fonts/spidermanFont.ttf");
     // b1.setFontStyle("Helvetica");
     b1.setTextColor(PColor.WHITE);
@@ -131,7 +131,7 @@ public class Game extends PApplet{
     System.out.println("Done loading Level 1 ...");
     
     //SETUP: Level 2
-    player3 = new Sprite(this, player3File, 0.25f);
+    player3 = new Sprite(p, player3File, 0.25f);
     player3.moveTo(player3startX, player3startY);
     level2World.addSpriteCopyTo(runningHorse, 100, 200);  //example Sprite added to a World at a location, with a speed
     level2World.printWorldSprites();
@@ -140,7 +140,7 @@ public class Game extends PApplet{
     
     //SETUP: Sound
     // Load a soundfile from the sounds folder of the sketch and play it back
-     //song = new SoundFile(this, "sounds/Lenny_Kravitz_Fly_Away.mp3");
+     //song = new SoundFile(p, "sounds/Lenny_Kravitz_Fly_Away.mp3");
      //song.play();
     
     System.out.println("Game started...");
@@ -186,7 +186,7 @@ public class Game extends PApplet{
     if(currentScreen == level1Grid){
 
       //set [W] key to move the player1 up & avoid Out-of-Bounds errors
-      if(p.keyCode == 87){
+      if(p.keyCode == 83){
       
         //Store old GridLocation
         GridLocation oldLoc = new GridLocation(player2Row, player2Col);
@@ -195,7 +195,7 @@ public class Game extends PApplet{
         
 
         //change the field for player2Row
-        player2Row--;
+        player2Row++;
       }
 
       // if the 'n' key is pressed, ask for their name
@@ -208,9 +208,6 @@ public class Game extends PApplet{
         //Toggle the animation on & off
         doAnimation = !doAnimation;
         System.out.println("doAnimation: " + doAnimation);
-        if(currentGrid != null){
-          currentGrid.setMark("X",currentGrid.getGridLocation());
-        }
       }
 
 
@@ -239,14 +236,19 @@ public class Game extends PApplet{
     PColor.printPColor(p, color);
 
     // Print grid coordinate clicked
-    if(currentGrid != null){
-      System.out.println("Grid location --> " + currentGrid.getGridLocation());
+    if(currentScreen instanceof Grid){
+      System.out.println("Grid location --> " + ((Grid) currentScreen).getGridLocation());
+    }
+
+    // "Mark" the grid coordinate to track the state of the Grid
+    if(currentScreen instanceof Grid){
+      ((Grid) currentScreen).setMark("X",((Grid) currentScreen).getGridLocation());
     }
 
     // what to do if clicked? (ex. assign a new location to player1)
     if(currentScreen == level1Grid){
-      player1Row = currentGrid.getGridLocation().getRow();
-      player1Col = currentGrid.getGridLocation().getCol();
+      player1Row = level1Grid.getGridLocation().getRow();
+      player1Col = level1Grid.getGridLocation().getCol();
     }
     
 
@@ -262,7 +264,7 @@ public class Game extends PApplet{
 
     if(!isGameOver()) {
       //set the title each loop
-      // p.surface.setTitle(titleText + "    " + extraText + " " + name + ": " + health);
+      // surface.setTitle(titleText + "    " + extraText + " " + name + ": " + health);
 
       //adjust the extra text as desired
     
@@ -272,19 +274,26 @@ public class Game extends PApplet{
   // Updates what is drawn on the screen each frame
   public void updateScreen(){
 
-    // UPDATE: Background of the current Screen
-    currentScreen.show();
+    // UPDATE: first lay down the Background
+    currentScreen.showBg();
 
     // UPDATE: splashScreen
-    if(currentScreen == splashScreen && splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
+    if(currentScreen == splashScreen){
+
+      // Print an s in console when splashscreen is up
       System.out.print("s");
-      currentScreen = level1Grid;
+
+      // Change the screen to level 1 between 3 and 5 seconds
+      if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
+        currentScreen = level1Grid;
+      }
     }
 
     // UPDATE: level1Grid Screen
     if(currentScreen == level1Grid){
+
+      // Print a '1' in console when level1
       System.out.print("1");
-      currentGrid = level1Grid;
 
       // Displays the player1 image
       GridLocation player1Loc = new GridLocation(player1Row,player1Col);
@@ -293,11 +302,6 @@ public class Game extends PApplet{
       // Displays the player2 image
       GridLocation player2Loc = new GridLocation(player2Row, player2Col);
       level1Grid.setTileSprite(player2Loc, player2);
-      
-      // Updates other screen elements
-      level1Grid.showGridImages();
-      level1Grid.showGridSprites();
-      level1Grid.showWorldSprites();
 
       // Moves to next level based on a button click
       b1.show();
@@ -310,14 +314,12 @@ public class Game extends PApplet{
     
     // UPDATE: level2World Screen
     if(currentScreen == level2World){
+
+      // Print a '2' in console when level2
       System.out.print("2");
-      currentWorld = level2World;
-      // currentGrid = null;
 
       level2World.moveBgXY(-3.0f, 0f);
-      level2World.show();
       player3.show();
-      level2World.showWorldSprites();
 
     }
 
@@ -331,6 +333,8 @@ public class Game extends PApplet{
       runningHorse.animateHorizontal(5.0f, 10.0f, true);
     }
 
+    // UPDATE: Other built-in to current World/Grid/HexGrid
+    currentScreen.show();
 
   }
 

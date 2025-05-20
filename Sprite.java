@@ -29,6 +29,12 @@ public class Sprite{
 
   //------------------ SPRITE CONSTRUCTORS --------------------//
 
+  // // Sprite Constructor #0: Pass in the image file (Non-animated)
+  // public Sprite(PApplet p, String spriteImgFile){
+  //   this(p, spriteImgFile, 1.0f, 0.0f, 0.0f, false);
+  // }
+
+
   // Sprite Constructor #1: Only pass in the image file (Non-animated)
   public Sprite(PApplet p, String spriteImgFile){
     this(p, spriteImgFile, 1.0f, 0.0f, 0.0f, false);
