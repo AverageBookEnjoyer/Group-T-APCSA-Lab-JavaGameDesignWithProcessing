@@ -116,7 +116,8 @@ public class Game extends PApplet{
     //SETUP: Level 1
     player1 = p.loadImage(player1File);
     player1.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-    player2 = new AnimatedSprite(this, "sprites/chick_walk.png", "sprites/chick_walk.json", 0.0f, 0.0f, 5.0f);
+    player2 = new AnimatedSprite(this, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
+    player2.resize(50, 50);
     level1Grid.setTileSprite(new GridLocation (player2Row, player2Col), player2);
 
     b1 = new Button(this, "rect", 625, 525, 150, 50, "GoTo Level 2");
@@ -134,6 +135,7 @@ public class Game extends PApplet{
     player3.moveTo(player3startX, player3startY);
     level2World.addSpriteCopyTo(runningHorse, 100, 200);  //example Sprite added to a World at a location, with a speed
     level2World.printWorldSprites();
+    level2World.addSpriteCopy(player2);
     System.out.println("Done loading Level 2 ...");
     
     //SETUP: Sound
