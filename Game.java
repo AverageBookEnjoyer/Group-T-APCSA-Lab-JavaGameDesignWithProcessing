@@ -43,10 +43,10 @@ public class Game extends PApplet{
   int player1Row = 3;
   int player1Col = 0;
   String player2File = "images/yellowhorse.png";
-  int player2Row = 0;
-  int player2Col = 2;
+  int scientistRow = 0;
+  int scientistCol = 2;
   int health = 3;
-  AnimatedSprite player2;
+  AnimatedSprite scientist;
   Button b1;
 
   // VARIABLES: Level2World Pixel-based Screen
@@ -127,9 +127,9 @@ public class Game extends PApplet{
     //SETUP: Level 1
     player1 = p.loadImage(player1File);
     player1.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-    player2 = new AnimatedSprite(p, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
-    player2.resize(50, 50);
-    level1Grid.setTileSprite(new GridLocation (player2Row, player2Col), player2);
+    scientist = new AnimatedSprite(p, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
+    scientist.resize(50, 50);
+    level1Grid.setTileSprite(new GridLocation (scientistRow, scientistCol), scientist);
 
     b1 = new Button(p, "rect", 625, 525, 150, 50, "GoTo Level 2");
     // b1.setFontStyle("fonts/spidermanFont.ttf");
@@ -146,7 +146,7 @@ public class Game extends PApplet{
     player20.moveTo(player20startX, player20startY);
     level2World.addSpriteCopyTo(runningHorse, 100, 200);  //example Sprite added to a World at a location, with a speed
     level2World.printWorldSprites();
-    level2World.addSpriteCopy(player2);
+    level2World.addSpriteCopy(scientist); // !!! on purpose?
     System.out.println("Done loading Level 2 ...");
 
     // SETUP: Level 3
@@ -219,13 +219,13 @@ public class Game extends PApplet{
       if(p.keyCode == 83){
       
         //Store old GridLocation
-        GridLocation oldLoc = new GridLocation(player2Row, player2Col);
+        GridLocation oldLoc = new GridLocation(scientistRow, scientistCol);
         
         //Erase image from previous location
         
 
         //change the field for player2Row
-        player2Row++;
+        scientistRow++;
       }
 
       // if the 'n' key is pressed, ask for their name
@@ -334,8 +334,8 @@ public class Game extends PApplet{
       level1Grid.setTileImage(player1Loc, player1);
 
       // Displays the player2 image
-      GridLocation player2Loc = new GridLocation(player2Row, player2Col);
-      level1Grid.setTileSprite(player2Loc, player2);
+      GridLocation scientistLoc = new GridLocation(scientistRow, scientistCol);
+      level1Grid.setTileSprite(scientistLoc, scientist);
 
       // Moves to next level based on a button click
       b1.show();
