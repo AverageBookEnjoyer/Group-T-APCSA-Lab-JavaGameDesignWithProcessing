@@ -1,11 +1,14 @@
 /* Game Class Starter File
  * Authors: Marcus, Thomas, Taha, 
  * Last Edit: 5/20/25
- * using new Screen show method
+ * using new Screen show() method
  * Eliminate usage of currentWorld & currentGrid
+ * Use of CycleTimer for draw loop
+ * Added Platform example in level3World
  */
 
 //import processing.sound.*;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -50,10 +53,17 @@ public class Game extends PApplet{
   World level2World;
   String level2BgFile = "images/sky.png";
   PImage level2Bg;
-  String player3File = "images/zapdos.png";
-  Sprite player3; //Use Sprite for a pixel-based Location
-  int player3startX = 50;
-  int player3startY = 300;
+  String player20File = "images/zapdos.png";
+  Sprite player20; //Use Sprite for a pixel-based Location
+  int player20startX = 50;
+  int player20startY = 300;
+
+  //VARIABLES: Level3World Pixel-based Platformer
+  World level3World;
+  String level3BgFile = "images/wall.jpg";
+  PImage level3Bg;
+  Platform plat;
+  // String player4
 
   // VARIABLES: EndScreen
   World endScreen;
@@ -63,7 +73,7 @@ public class Game extends PApplet{
 
   // VARIABLES: Tracking the current Screen being displayed
   Screen currentScreen;
-  private int msElapsed = 0;
+  CycleTimer slowCycleTimer;
 
   boolean start = true;
 
@@ -100,10 +110,11 @@ public class Game extends PApplet{
     endBg.resize(p.width, p.height);
 
     //SETUP: Screens, Worlds, Grids
-    splashScreen = new Screen(this, "splash", splashBg);
-    level1Grid = new Grid(this, "chessBoard", level1Bg, 6, 8);
+    splashScreen = new Screen(p, "splash", splashBg);
+    level1Grid = new Grid(p, "chessBoard", level1Bg, 6, 8);
     // level1Grid.startPrintingGridMarks();
-    level2World = new World(p, "sky", level2Bg, 4.0f, 0.0f, -800.0f); //moveable World constructor --> defines center & scale (x, scale, y)???
+    level2World = new World(p, "sky", level2BgFile, 4.0f, 0.0f, -800.0f); //moveable World constructor --> defines center & scale (x, scale, y)???
+    
     System.out.println( "World constructed: " + Util.toStringPImage(level2World.getBgImage()));
        
     // level2World = new World("sky", level2Bg);   //non-moving World construtor
@@ -111,7 +122,7 @@ public class Game extends PApplet{
     currentScreen = splashScreen;
 
     //SETUP: All Game objects
-    runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 10.0f);
+    runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 1.0f);
 
     //SETUP: Level 1
     player1 = p.loadImage(player1File);
@@ -122,7 +133,7 @@ public class Game extends PApplet{
 
     b1 = new Button(p, "rect", 625, 525, 150, 50, "GoTo Level 2");
     // b1.setFontStyle("fonts/spidermanFont.ttf");
-    // b1.setFontStyle("Helvetica");
+    b1.setFontStyle("Calibri");
     b1.setTextColor(PColor.WHITE);
     b1.setButtonColor(PColor.BLACK);
     b1.setHoverColor(PColor.get(100,50,200));
@@ -131,13 +142,24 @@ public class Game extends PApplet{
     System.out.println("Done loading Level 1 ...");
     
     //SETUP: Level 2
-    player3 = new Sprite(p, player3File, 0.25f);
-    player3.moveTo(player3startX, player3startY);
+    player20 = new Sprite(p, player20File, 0.25f);
+    player20.moveTo(player20startX, player20startY);
     level2World.addSpriteCopyTo(runningHorse, 100, 200);  //example Sprite added to a World at a location, with a speed
     level2World.printWorldSprites();
     level2World.addSpriteCopy(player2);
     System.out.println("Done loading Level 2 ...");
-    
+
+    // SETUP: Level 3
+    level3Bg = loadImage(level3BgFile);
+    level3Bg.resize(p.width, p.height);
+    level3World = new World(p,"platformer", level3Bg);
+    plat = new Platform(p, PColor.MAGENTA, 500.0f, 100.0f, 200.0f, 20.0f);
+    plat.setOutlineColor(PColor.BLACK);
+    plat.startGravity(5.0f); //sets gravity to a rate of 5.0
+    level3World.addSprite(plat);    
+    System.out.println("Done loading Level 3 ...");
+
+
     //SETUP: Sound
     // Load a soundfile from the sounds folder of the sketch and play it back
      //song = new SoundFile(p, "sounds/Lenny_Kravitz_Fly_Away.mp3");
@@ -152,19 +174,27 @@ public class Game extends PApplet{
   //(Anything drawn on the screen should be called from here)
   public void draw() {
 
+    // Update Screen Visuals
     updateTitleBar();
     updateScreen();
 
-    //simple timing handling
-    if (msElapsed % 300 == 0) {
-      //sprite handling
+    // Set Timers
+    int cycleTime = 1;  //milliseconds
+    int slowCycleTime = 300;  //milliseconds
+    if(slowCycleTimer == null){
+      slowCycleTimer = new CycleTimer(p, slowCycleTime);
+    }
+
+    // Move Sprites
+    if(slowCycleTimer.isDone()){
       populateSprites();
       moveSprites();
     }
-    msElapsed +=100;
-    currentScreen.pause(100);
 
-    //check for end of game
+    // Pause Cycle
+    currentScreen.pause(cycleTime);   // slows down the game cycles
+
+    // Check for end of game
     if(isGameOver()){
       endGame();
     }
@@ -220,6 +250,10 @@ public class Game extends PApplet{
       currentScreen = level1Grid;
     } else if(p.key == '2'){
       currentScreen = level2World;
+    } else if(p.key == '3'){
+      currentScreen = level3World;
+      plat.moveTo(500.0f, 100.0f);
+      plat.setSpeed(0,0);
     }
 
 
@@ -318,8 +352,17 @@ public class Game extends PApplet{
       // Print a '2' in console when level2
       System.out.print("2");
 
-      level2World.moveBgXY(-3.0f, 0f);
-      player3.show();
+      level2World.moveBgXY(-0.3f, 0f);  //adjust speeds of moving backgrounds, -3.0f for 100 ms delays
+      player20.show();
+
+    }
+
+    // UPDATE: level3World Screen
+    if(currentScreen == level3World){
+
+      // Print a '3 in console when level3
+      System.out.print("3");
+
 
     }
 
@@ -330,7 +373,7 @@ public class Game extends PApplet{
 
     // UPDATE: Any Screen
     if(doAnimation){
-      runningHorse.animateHorizontal(5.0f, 10.0f, true);
+      runningHorse.animateHorizontal(0.5f, 1.0f, true);
     }
 
     // UPDATE: Other built-in to current World/Grid/HexGrid
