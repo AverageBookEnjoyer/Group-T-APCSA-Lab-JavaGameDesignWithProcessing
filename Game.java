@@ -31,7 +31,7 @@ public class Game extends PApplet{
   // VARIABLES: Splash Screen
   Screen splashScreen;
   PImage splashBg;
-  String splashBgFile = "images/labStartUpScreen.png";
+  String splashBgFile = "images/startScreen.png";
   //SoundFile song;
 
   // VARIABLES: Level1Grid Screen
@@ -60,7 +60,7 @@ public class Game extends PApplet{
 
   //VARIABLES: Level3World Pixel-based Platformer
   World level3World;
-  String level3BgFile = "images/wall.jpg";
+  String level3BgFile = "images/alchemyScreen.png";
   PImage level3Bg;
   Platform plat;
   // String player4
@@ -254,6 +254,9 @@ public class Game extends PApplet{
         scientist.stopGravity();
         scientist.setSpeed(0f, 0f);
         scientist.setAccelerationY(0f);
+        scientist.setAccelerationY(4f);
+        
+        
       }
       if(p.key == 'a'){
         scientist.move(-10f, 0f);
