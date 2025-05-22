@@ -20,7 +20,7 @@ public class Game extends PApplet{
   PApplet p;
 
   // VARIABLES: Title Bar
-  String titleText = "PeanutChessSkyHorse2";
+  String titleText = "Alchemist Ascent";
   String extraText = "CurrentLevel?";
   String name = "";
 
@@ -31,7 +31,7 @@ public class Game extends PApplet{
   // VARIABLES: Splash Screen
   Screen splashScreen;
   PImage splashBg;
-  String splashBgFile = "images/apcsa.png";
+  String splashBgFile = "images/labStartUpScreen.png";
   //SoundFile song;
 
   // VARIABLES: Level1Grid Screen
@@ -127,7 +127,7 @@ public class Game extends PApplet{
     //SETUP: Level 1
     player1 = p.loadImage(player1File);
     player1.resize(level1Grid.getTileWidth(),level1Grid.getTileHeight());
-    scientist = new AnimatedSprite(p, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.8f);
+    scientist = new AnimatedSprite(p, "sprites/sci.png", "sprites/sci.json", 0.0f, 0.0f, 0.5f);
     scientist.resize(50, 50);
     level1Grid.setTileSprite(new GridLocation (scientistRow, scientistCol), scientist);
 
@@ -156,7 +156,8 @@ public class Game extends PApplet{
     plat = new Platform(p, PColor.MAGENTA, 500.0f, 100.0f, 200.0f, 20.0f);
     plat.setOutlineColor(PColor.BLACK);
     plat.startGravity(5.0f); //sets gravity to a rate of 5.0
-    level3World.addSprite(plat);    
+    level3World.addSprite(plat);   
+    level3World.addSprite(scientist);
     System.out.println("Done loading Level 3 ...");
 
 
@@ -240,8 +241,26 @@ public class Game extends PApplet{
         System.out.println("doAnimation: " + doAnimation);
       }
 
+    }
 
 
+    //-------------------- KEYS FOR LEVEL 3 --------------------
+    if(currentScreen == level3World){
+      
+      if(p.key == 's'){
+        scientist.startGravity();
+      }
+      if(p.key == 'w'){
+        scientist.stopGravity();
+        scientist.setSpeed(0f, 0f);
+        scientist.setAccelerationY(0f);
+      }
+      if(p.key == 'a'){
+        scientist.move(-10f, 0f);
+      }
+      if(p.key == 'd'){
+      scientist.move(10f, 0f);
+      }
     }
 
     //CHANGING SCREENS BASED ON KEYS
@@ -254,6 +273,8 @@ public class Game extends PApplet{
       currentScreen = level3World;
       plat.moveTo(500.0f, 100.0f);
       plat.setSpeed(0,0);
+      scientist.moveTo(500f, 100f);
+      scientist.setSpeed(0f,0f);
     }
 
 
