@@ -191,12 +191,14 @@ public class Sprite{
 
   public void startJump(float accelY){
   this.hasJump = true;
-  setSpeed(0f, -10.0f);
+  setSpeed(0f, -8.0f);
   setAccelerationY(accelY);
+  startGravity();
   }
 
   public void startJump(){
-    startJump(5.0f);
+    startJump(10.0f);
+    startGravity();
   }
 
   public void stopJump(){

@@ -262,9 +262,7 @@ public class Game extends PApplet{
 
       if(p.key == 'w'){
         scientist.startJump();
-          scientist.stopJump();
-          scientist.startGravity();
-
+        scientist.stopJump();
       }
 
       if(p.key == 'a'){
