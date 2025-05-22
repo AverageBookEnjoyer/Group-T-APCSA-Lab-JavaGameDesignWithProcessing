@@ -30,6 +30,7 @@ public class Sprite{
   private float accelY;
   private boolean isAnimated;
   private boolean hasGravity = false;
+  private boolean hasJump = false;
 
 
   //------------------ SPRITE CONSTRUCTORS --------------------//
@@ -188,6 +189,20 @@ public class Sprite{
     this.hasGravity = false;
   }
 
+  public void startJump(float accelY){
+  this.hasJump = true;
+  setSpeed(0f, -10.0f);
+  setAccelerationY(accelY);
+  }
+
+  public void startJump(){
+    startJump(5.0f);
+  }
+
+  public void stopJump(){
+    this.hasJump = false;
+  }
+
   // method to rotate Sprite image on the screen
   public void rotate(float degrees){
     float rads = p.radians(degrees);
@@ -340,6 +355,10 @@ public class Sprite{
     if(hasGravity){
       float sec = deltaTime/1000;
       speedY += accelY*sec;
+    }
+    if(hasJump){
+      float sec = deltaTime/1000;
+      speedY -= accelY*sec;
     }
     move(speedX, speedY);
   }

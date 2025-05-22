@@ -247,17 +247,26 @@ public class Game extends PApplet{
     //-------------------- KEYS FOR LEVEL 3 --------------------
     if(currentScreen == level3World){
       
+      if(p.key == 'q'){
+        System.out.println("stopping");
+        scientist.stopGravity();
+        scientist.stopJump();
+        scientist.setAccelerationY(0.0f);
+        scientist.setSpeed(0.0f, 0.0f);
+
+      }
+
       if(p.key == 's'){
         scientist.startGravity();
       }
+
       if(p.key == 'w'){
-        scientist.stopGravity();
-        scientist.setSpeed(0f, 0f);
-        scientist.setAccelerationY(0f);
-        scientist.setAccelerationY(4f);
-        
-        
+        scientist.startJump();
+          scientist.stopJump();
+          scientist.startGravity();
+
       }
+
       if(p.key == 'a'){
         scientist.move(-10f, 0f);
       }
