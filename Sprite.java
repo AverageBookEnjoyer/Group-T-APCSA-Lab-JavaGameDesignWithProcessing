@@ -178,6 +178,16 @@ public class Sprite{
     this.accelY = accelY;
   }
 
+  // Return the acceleration of the Sprite in the Y-direction
+  public float getAccelerationY(){
+    return accelY;
+  }
+
+  // Return the acceleration of the Sprite in the X-direction
+  public float getAccelerationX(){
+    return accelX;
+  }
+
   // Starts gravity acting on a Sprite at default rate or previously defined rate
   public void startGravity(){
     this.hasGravity = true;

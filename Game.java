@@ -254,10 +254,19 @@ public class Game extends PApplet{
       }
 
       if(p.key == 'a'){
-        scientist.move(-10f, 0f);
+        scientist.setSpeedX(-4f);
+      } else {
+
       }
+
       if(p.key == 'd'){
-      scientist.move(10f, 0f);
+        scientist.setSpeedX(4f);
+      } else {
+        scientist.setAccelerationX(2f);
+        if(scientist.getSpeedX() < 0){
+          scientist.setAccelerationX(0f);
+          scientist.setSpeedX(0f);
+        }
       }
     }
 
