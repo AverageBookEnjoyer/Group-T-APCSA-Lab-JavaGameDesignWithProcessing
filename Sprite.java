@@ -32,6 +32,7 @@ public class Sprite{
   private float defaultGravity = 5.0f;
   private float gravityStrength = defaultGravity;
   private float defaultJumpSpeed = 6.0f;
+  private boolean touching = false;
 
 
   //------------------ SPRITE CONSTRUCTORS --------------------//
@@ -206,6 +207,7 @@ public class Sprite{
   public void stopGravity(){
     this.hasGravity = false;
     setAccelerationY(0.0f);
+    setSpeedY(0.0f);
   }
 
   // Creates a jump with a specific jumpSpeed at a pre-existing gravityStrength
@@ -267,6 +269,25 @@ public class Sprite{
   public void setCenterY(float centerY){
     this.centerY=centerY;
   }
+
+    /*------------------ COLLISION ATTEMPT ------------------  */
+  public boolean isTouchingTop(Sprite something){
+    int cushion = 1;
+    if(this.getBottom() > something.getTop()-cushion //is he low enough
+      && this.getBottom() < something.getTop()+cushion*100 // is he NOT below the plat
+      && this.getLeft() < something.getRight() //is inside the right edge
+      && this.getRight() > something.getLeft()){ // is he to the right of the left edge
+        touching = true;
+    } else {
+      touching = false;
+    }
+    return touching;
+  }
+
+  public boolean getTouching(){
+    return touching;
+  }
+  
 
 
   /*------------------ SPRITE BOUNDARY METHODS  --------------------

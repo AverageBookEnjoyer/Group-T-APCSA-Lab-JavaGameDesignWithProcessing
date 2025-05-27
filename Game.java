@@ -160,9 +160,9 @@ public class Game extends PApplet{
     System.out.println("Done loading Level 2 (skyWorld)...");
 
     // SETUP: Setup more labWorld objects
-    plat = new Platform(p, PColor.MAGENTA, 500.0f, 100.0f, 200.0f, 20.0f);
+    plat = new Platform(p, PColor.MAGENTA, 500.0f, 200.0f, 200.0f, 20.0f);
     plat.setOutlineColor(PColor.BLACK);
-    plat.startGravity(5.0f); //sets gravity to a rate of 5.0
+    plat.stopGravity(); 
     labWorld.addSprite(plat);   
     labWorld.addSprite(scientist);
     System.out.println("Done loading Level 3 (labWorld)...");
@@ -198,6 +198,8 @@ public class Game extends PApplet{
       populateSprites();
       moveSprites();
     }
+
+    checkCollision();
 
     // DRAW LOOP: Pause Game Cycle
     currentScreen.pause(cycleTime);   // slows down the game cycles
@@ -285,7 +287,7 @@ public class Game extends PApplet{
       currentScreen = labWorld;
 
       //reset the moving Platform every time the Screen is re-displayed
-      plat.moveTo(500.0f, 100.0f);
+      plat.moveTo(500.0f, 200.0f);
       plat.setSpeed(0,0);
       scientist.moveTo(500f, 100f);
       scientist.setSpeed(0f,0f);
@@ -445,6 +447,7 @@ public class Game extends PApplet{
 
   }
 
+  
   // Moves around the enemies/sprites on the Screen
   public void moveSprites(){
 
@@ -475,8 +478,19 @@ public class Game extends PApplet{
 
   }
 
+
+
   // Checks if there is a collision between Sprites on the Screen
-  public boolean checkCollision(GridLocation loc, GridLocation nextLoc){
+  public boolean checkCollision(){
+    System.out.println("SCI: " + scientist.getBottom());
+    System.out.println("PLAT" + plat.getTop());
+
+    if(scientist.isTouchingTop(plat)){
+      scientist.stopGravity();
+      System.out.println("TOUCHING!!!!");
+    }
+
+
 
     //Check what image/sprite is stored in the CURRENT location
     // PImage image = grid.getTileImage(loc);
