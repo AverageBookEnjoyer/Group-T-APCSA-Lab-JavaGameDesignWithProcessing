@@ -488,6 +488,8 @@ public class Game extends PApplet{
     if(scientist.isTouchingTop(plat)){
       scientist.stopGravity();
       System.out.println("TOUCHING!!!!");
+    } else {
+      scientist.startGravity();
     }
 
 

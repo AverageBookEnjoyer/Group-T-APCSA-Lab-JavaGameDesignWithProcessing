@@ -272,9 +272,9 @@ public class Sprite{
 
     /*------------------ COLLISION ATTEMPT ------------------  */
   public boolean isTouchingTop(Sprite something){
-    int cushion = 1;
+    double cushion = 1;
     if(this.getBottom() > something.getTop()-cushion //is he low enough
-      && this.getBottom() < something.getTop()+cushion*100 // is he NOT below the plat
+      && this.getBottom() < something.getTop()+cushion*25 // is he NOT below the plat
       && this.getLeft() < something.getRight() //is inside the right edge
       && this.getRight() > something.getLeft()){ // is he to the right of the left edge
         touching = true;
