@@ -264,20 +264,14 @@ public class Game extends PApplet{
       }
 
       if(p.key == 'a'){
-        scientist.setSpeedX(-4f);
-      } else {
-
+        scientist.setSpeedX(-3f);
       }
 
       if(p.key == 'd'){
-        scientist.setSpeedX(4f);
-      } else {
-        scientist.setAccelerationX(2f);
-        if(scientist.getSpeedX() < 0){
-          scientist.setAccelerationX(0f);
-          scientist.setSpeedX(0f);
-        }
+        scientist.setSpeedX(3f);
       }
+
+
     }
 
 
@@ -295,6 +289,18 @@ public class Game extends PApplet{
       plat.setSpeed(0,0);
       scientist.moveTo(500f, 100f);
       scientist.setSpeed(0f,0f);
+    }
+
+  }
+
+  public void keyReleased(){
+
+    if(p.key == 'a'){
+      scientist.setSpeedX(0f);
+    }
+
+    if(p.key == 'd'){
+      scientist.setSpeedX(0f);
     }
 
   }
