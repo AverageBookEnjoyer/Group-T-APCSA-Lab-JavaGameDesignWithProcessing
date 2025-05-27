@@ -127,8 +127,9 @@ public class Game extends PApplet{
     //SETUP: Setup more grid1 objects
     piece1 = p.loadImage(piece1File);
     piece1.resize(grid1.getTileWidth(),grid1.getTileHeight());
-    chick = new AnimatedSprite(p, chickFile, chickJson, 0.0f, 0.0f, 0.5f);
-    grid1.setTileSprite(new GridLocation (chickRow, chickCol), chick);
+    scientist = new AnimatedSprite(p, scientistFile, scientistJson, 0.0f, 0.0f, 0.5f);
+    scientist.resize(50, 50);
+    grid1.setTileSprite(new GridLocation (scientistRow, scientistCol), scientist);
     // grid1.startPrintingGridMarks();
     b1 = new Button(p, "rect", 625, 525, 150, 50, "GoTo Level 2");
     grid1.addSprite(b1);
