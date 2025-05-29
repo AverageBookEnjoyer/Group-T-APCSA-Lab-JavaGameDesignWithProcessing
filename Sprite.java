@@ -277,7 +277,7 @@ public class Sprite{
       && this.getBottom() < something.getTop()+cushion*25 // is he NOT below the plat
       && this.getLeft() < something.getRight() //is inside the right edge
       && this.getRight() > something.getLeft()){ // is he to the right of the left edge
-        touching = true;
+      touching = true;
     } else {
       touching = false;
     }
@@ -299,6 +299,39 @@ public class Sprite{
     }
     return touching;
   }
+
+  public boolean isTouchingRight(Sprite something){
+  double cushion = 5;
+    if(this.getLeft() > something.getRight()
+    && this.getLeft() < something.getRight() + cushion
+    
+    // && ((this.getTop() > something.getBottom()
+    // && this.getTop() < something.getBottom()+cushion) 
+    // || (this.getBottom() > something.getTop()-cushion
+    // && this.getBottom() < something.getTop()+cushion*25))
+    ){
+    touching = true;
+    } else {
+      touching = false;
+    }
+    return touching;
+  }
+    
+  public boolean isTouchingLeft(Sprite something){
+  double cushion = 5;
+    if(this.getRight() > something.getLeft()
+    && this.getRight() < something.getLeft() + cushion
+    
+    // && this.getTop() > something.getBottom()
+    // && this.getTop() < something.getBottom()+cushion 
+    ){
+    touching = true;
+    } else {
+    touching = false;
+    }
+    return touching;
+    }
+    
 
   public boolean getTouching(){
     return touching;

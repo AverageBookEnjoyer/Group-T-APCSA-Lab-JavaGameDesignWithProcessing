@@ -494,9 +494,18 @@ public class Game extends PApplet{
 
     if(scientist.isTouchingTop(plat)){
       scientist.stopGravity();
-      System.out.println("TOUCHING!!!!");
     } else {
       scientist.startGravity();
+    }
+
+    if(scientist.isTouchingLeft(plat)){
+      System.out.println("left");
+      scientist.move(-30f,0f);
+    }
+
+    if(scientist.isTouchingRight(plat)){
+      System.out.println("right");
+      scientist.move(30f, 0f);
     }
 
     if(scientist.isTouchingBottom(plat)){
@@ -504,12 +513,10 @@ public class Game extends PApplet{
       scientist.setAccelerationY(0f);
       scientist.setSpeedY(0f);
       scientist.startGravity();
-      System.out.println("Bottom");
     }
 
     if(scientist.isTouchingTop(plat2)){
       scientist.stopGravity();
-      System.out.println("TOUCHING!!!!");
     } else {
       scientist.startGravity();
     }
@@ -519,7 +526,6 @@ public class Game extends PApplet{
       scientist.setAccelerationY(0f);
       scientist.setSpeedY(0f);
       scientist.startGravity();
-      System.out.println("Bottom");
     }
 
 
