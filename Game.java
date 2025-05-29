@@ -492,6 +492,14 @@ public class Game extends PApplet{
       scientist.startGravity();
     }
 
+    if(scientist.isTouchingBottom(plat)){
+      scientist.move(0f,3f);
+      scientist.setAccelerationY(0f);
+      scientist.setSpeedY(0f);
+      scientist.startGravity();
+      System.out.println("Bottom");
+    }
+
 
 
     //Check what image/sprite is stored in the CURRENT location

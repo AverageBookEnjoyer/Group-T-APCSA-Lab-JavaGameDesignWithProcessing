@@ -283,6 +283,22 @@ public class Sprite{
     }
     return touching;
   }
+  
+
+  public boolean isTouchingBottom(Sprite something){
+    double cushion = 5;
+    if(this.getTop() > something.getBottom() // is the characters head hiiting the bottom of the object
+    && this.getTop() < something.getBottom()+cushion
+
+    //platform side boarders | <-  -> |
+    && this.getLeft() < something.getRight()
+    && this.getRight() > something.getLeft()){
+      touching = true;
+    } else {
+      touching = false;
+    }
+    return touching;
+  }
 
   public boolean getTouching(){
     return touching;
