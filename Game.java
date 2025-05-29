@@ -65,6 +65,7 @@ public class Game extends PApplet{
   PImage labWorldBg;
   String labWorldBgFile = "images/alchemyScreen.png";
   Platform plat;
+  Platform plat2;
 
   // VARIABLES: endScreen
   World endScreen;
@@ -160,11 +161,16 @@ public class Game extends PApplet{
     System.out.println("Done loading Level 2 (skyWorld)...");
 
     // SETUP: Setup more labWorld objects
+    
     plat = new Platform(p, PColor.MAGENTA, 500.0f, 200.0f, 200.0f, 20.0f);
     plat.setOutlineColor(PColor.BLACK);
     plat.stopGravity(); 
+    plat2 = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
+    plat2.setOutlineColor(PColor.BLACK);
+    plat.stopGravity();
     labWorld.addSprite(plat);   
     labWorld.addSprite(scientist);
+    labWorld.addSprite(plat2);
     System.out.println("Done loading Level 3 (labWorld)...");
 
 
@@ -287,8 +293,11 @@ public class Game extends PApplet{
       currentScreen = labWorld;
 
       //reset the moving Platform every time the Screen is re-displayed
+      
       plat.moveTo(500.0f, 200.0f);
       plat.setSpeed(0,0);
+      plat2.moveTo(200.0f, 400.0f);
+      plat2.setSpeed(0f,0f);
       scientist.moveTo(500f, 100f);
       scientist.setSpeed(0f,0f);
     }
@@ -482,8 +491,6 @@ public class Game extends PApplet{
 
   // Checks if there is a collision between Sprites on the Screen
   public boolean checkCollision(){
-    System.out.println("SCI: " + scientist.getBottom());
-    System.out.println("PLAT" + plat.getTop());
 
     if(scientist.isTouchingTop(plat)){
       scientist.stopGravity();
@@ -493,6 +500,21 @@ public class Game extends PApplet{
     }
 
     if(scientist.isTouchingBottom(plat)){
+      scientist.move(0f,3f);
+      scientist.setAccelerationY(0f);
+      scientist.setSpeedY(0f);
+      scientist.startGravity();
+      System.out.println("Bottom");
+    }
+
+    if(scientist.isTouchingTop(plat2)){
+      scientist.stopGravity();
+      System.out.println("TOUCHING!!!!");
+    } else {
+      scientist.startGravity();
+    }
+
+    if(scientist.isTouchingBottom(plat2)){
       scientist.move(0f,3f);
       scientist.setAccelerationY(0f);
       scientist.setSpeedY(0f);
