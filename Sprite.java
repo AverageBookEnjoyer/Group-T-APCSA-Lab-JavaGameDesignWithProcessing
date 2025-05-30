@@ -2,7 +2,7 @@
  * Sprite class - to create objects that move around with their own properties
  * Inspired by Daniel Shiffman's p5js Animated Sprite tutorial
  * Note: Picture coordinate origina at top, left corner
- * @author Joel Bianchi
+ * @author Joel A Bianchi
  * @author Marcus Bistline
  * @version 5/29/25
  * updated formatting for javadoc
@@ -11,12 +11,10 @@
  * Added isSolid property to Sprites
  */
 
-
-import java.util.ArrayList;
-
 import processing.core.PApplet;
 import processing.core.PImage;
- 
+
+
 public class Sprite{
 
   public PApplet p;
@@ -107,9 +105,7 @@ public class Sprite{
     this.speedY = 0;
     this.isAnimated = isAnimated;
     this.isSolid = true;
-
     // System.out.println("---->Sprite Class: "+ Game.toStringPImage(spriteImg));
-
   }
 
   /**
@@ -786,4 +782,4 @@ public class Sprite{
     return "Sprite: fn: "+ spriteImgFile + "\tx:" + centerX + "\ty:" + centerY + "\tL:" + getLeft() + "\tT:" + getTop() + "\tVx:" + speedX + "\tVy:" + speedY + "\tw:" + w + "\th:" + h + "\t" + isAnimated;
   }
 
-}
+} // end of Sprite class

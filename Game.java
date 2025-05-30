@@ -1,16 +1,16 @@
-/* Game Class Starter File
- * Authors: Joel A. Bianchi
- * Last Edit: 5/22/25
- * using new Screen show() method
- * Eliminate usage of currentWorld & currentGrid
- * Use of CycleTimer for draw loop
- * Added Platform example in level3World
+/**
+ * Game Class - Primary game logic for a Java-based Processing Game
+ * @author Marcus Bistline
+ * @author Thomas Dillon
+ * @author Taha Khallouf
+ * @version 5/29/25
+ * Added example for using grid method setAllMarks()
  */
 
 //import processing.sound.*;
-
 import processing.core.PApplet;
 import processing.core.PImage;
+
 import java.util.ArrayList;
 
 public class Game extends PApplet{
@@ -589,4 +589,4 @@ public class Game extends PApplet{
   }
 
 
-} //close class
+} // end of Game class
