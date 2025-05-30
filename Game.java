@@ -35,38 +35,27 @@ public class Game extends PApplet{
   String splashBgFile = "images/startScreen.png";
   //SoundFile song;
 
-  // VARIABLES: grid1 Screen (pieces on a grid pattern)
-  Grid grid1;
-  PImage grid1Bg;
-  String grid1BgFile = "images/chess.jpg";
-  PImage piece1;   // Use PImage to display the image in a GridLocation
-  String piece1File = "images/x_wood.png";
-  int piece1Row = 3;
-  int piece1Col = 0;
+  // VARIABLES: Scientist
   AnimatedSprite scientist;
   String scientistFile = "sprites/sci.png";
   String scientistJson = "sprites/sci.json";
-  int scientistRow = 0;
-  int scientistCol = 2;
   int health = 3;
-
-  Button b1;
-
-  // VARIABLES: skyWorld Screen (characters move by pixels)
-  World skyWorld;
-  PImage skyWorldBg;
-  String skyWorldBgFile = "images/sky.png";
-  Sprite zapdos; //Use Sprite for a pixel-based Location
-  String zapdosFile = "images/zapdos.png";
-  int zapdosStartX = 50;
-  int zapdosStartY = 300;
 
   //VARIABLES: labWorld Pixel-based Platformer
   World labWorld;
   PImage labWorldBg;
   String labWorldBgFile = "images/alchemyScreen.png";
-  Platform plat;
-  Platform plat2;
+  Platform plat1A;
+  Platform plat1B;
+  Sprite portal1;
+
+  // VARIABLES: caveWorld
+  World caveWorld;
+  PImage caveWorldBg;
+  String caveWorldBgFile = "";
+  Platform plat2A;
+  Platform plat2B;
+
 
   // VARIABLES: endScreen
   World endScreen;
@@ -104,75 +93,46 @@ public class Game extends PApplet{
 
     //SETUP: Load BG images used in all screens
     splashBg = p.loadImage(splashBgFile);
-    grid1Bg = p.loadImage(grid1BgFile);
-    skyWorldBg = p.loadImage(skyWorldBgFile);
     labWorldBg = loadImage(labWorldBgFile);
+
     endBg = p.loadImage(endBgFile);
 
     //SETUP: If non-moving, Resize all BG images to exactly match the screen size
     splashBg.resize(p.width, p.height);
-    grid1Bg.resize(p.width, p.height);
     labWorldBg.resize(p.width, p.height);
+
     endBg.resize(p.width, p.height);   
 
     //SETUP: Construct each Screen, World, Grid
     splashScreen = new Screen(p, "splash", splashBg);
-    grid1 = new Grid(p, "chessBoard", grid1Bg, 6, 8);
-    skyWorld = new World(p, "sky", skyWorldBgFile, 4.0f, 0.0f, -800.0f); //moveable World constructor
     labWorld = new World(p,"platformer", labWorldBg);
+
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
     //SETUP: Construct Game objects used in All Screens
     runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 1.0f);
 
-    //SETUP: Setup more grid1 objects
-    piece1 = p.loadImage(piece1File);
-    piece1.resize(grid1.getTileWidth(),grid1.getTileHeight());
+    //SETUP: Setup scientist stuff
     scientist = new AnimatedSprite(p, scientistFile, scientistJson, 0.0f, 0.0f, 0.5f);
     scientist.resize(50, 50);
-    grid1.setTileSprite(new GridLocation (scientistRow, scientistCol), scientist);
-    // grid1.startPrintingGridMarks();
-    b1 = new Button(p, "rect", 625, 525, 150, 50, "GoTo Level 2");
-    grid1.addSprite(b1);
-    // b1.setFontStyle("fonts/spidermanFont.ttf");
-    b1.setFontStyle("Calibri");
-    b1.setTextColor(PColor.WHITE);
-    b1.setButtonColor(PColor.BLACK);
-    b1.setHoverColor(PColor.get(100,50,200));
-    b1.setOutlineColor(PColor.WHITE);
-    String[][] tileMarks = {
-      {"R","N","B","Q","K","B","N","R"},
-      {"P","P","P","P","P","P","P","P"},
-      {"", "", "", "", "", "", "", ""},
-      {"", "", "", "", "", "", "", ""},
-      {"P","P","P","P","P","P","P","P"},
-      {"R","N","B","Q","K","B","N","R"}
-    };
-    grid1.setAllMarks(tileMarks);
-    grid1.startPrintingGridMarks();
-    System.out.println("Done loading Level 1 (grid1)...");
+    System.out.println("Done loading Scientist stuff...");
     
-    //SETUP: Setup more skyWorld objects
-    zapdos = new Sprite(p, zapdosFile, 0.25f);
-    zapdos.moveTo(zapdosStartX, zapdosStartY);
-    skyWorld.addSprite(zapdos);
-    skyWorld.printWorldSprites();
-    skyWorld.addSpriteCopy(scientist); // !!! on purpose?
-    System.out.println("Done loading Level 2 (skyWorld)...");
-
     // SETUP: Setup more labWorld objects
-    
-    plat = new Platform(p, PColor.MAGENTA, 500.0f, 200.0f, 200.0f, 20.0f);
-    plat.setOutlineColor(PColor.BLACK);
-    plat.stopGravity(); 
-    plat2 = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
-    plat2.setOutlineColor(PColor.BLACK);
-    plat2.stopGravity();
-    labWorld.addSprite(plat);   
+    plat1A = new Platform(p, PColor.MAGENTA, 500.0f, 200.0f, 200.0f, 20.0f);
+    plat1A.setOutlineColor(PColor.BLACK);
+    plat1A.stopGravity(); 
+    plat1B = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
+    plat1B.setOutlineColor(PColor.BLACK);
+    plat1B.stopGravity();
+    portal1 = new Sprite(p, "images/o_gold.png",1.0f,200,420);
+
+    labWorld.addSprite(plat1A);   
     labWorld.addSprite(scientist);
-    labWorld.addSprite(plat2);
+    labWorld.addSprite(plat1B);
+    labWorld.addSprite(portal1);
     System.out.println("Done loading Level 3 (labWorld)...");
+
 
 
     //SETUP: Sound
@@ -228,31 +188,18 @@ public class Game extends PApplet{
     System.out.println("\nKey pressed: " + p.keyCode); //key gives you a character for the key pressed
 
     //What to do when a key is pressed?
-    
-    //KEYS FOR LEVEL1
-    if(currentScreen == grid1){
 
-      //set [S] key to move the chick down & avoid Out-of-Bounds errors
-      if(p.keyCode == 83){        
-
-        //change the field for chickRow
-        scientistRow++;
-      }
-
-      // if the 'n' key is pressed, ask for their name
-      if(p.key == 'n'){
-        name = Input.getString("What is your name?");
-      }
-
-      // if the 't' key is pressed, then toggle the animation on/off
-      if(p.key == 't'){
-        //Toggle the animation on & off
-        doAnimation = !doAnimation;
-        System.out.println("doAnimation: " + doAnimation);
-      }
-
+    // if the 'n' key is pressed, ask for their name
+    if(p.key == 'n'){
+      name = Input.getString("What is your name?");
     }
 
+    // if the 't' key is pressed, then toggle the animation on/off
+    if(p.key == 't'){
+      //Toggle the animation on & off
+      doAnimation = !doAnimation;
+      System.out.println("doAnimation: " + doAnimation);
+    }
 
     //-------------------- KEYS FOR LEVEL 3 --------------------
     if(currentScreen == labWorld){
@@ -287,22 +234,28 @@ public class Game extends PApplet{
     //CHANGING SCREENS BASED ON KEYS
     //change to level1 if 1 key pressed, level2 if 2 key is pressed
     if(p.key == '1'){
-      currentScreen = grid1;
-    } else if(p.key == '2'){
-      currentScreen = skyWorld;
-    } else if(p.key == '3'){
       currentScreen = labWorld;
+      startLabWorld();
+
+    } else if(p.key == '2'){
+      currentScreen = caveWorld;
+    } else if(p.key == '3'){
+      currentScreen = null;
 
       //reset the moving Platform every time the Screen is re-displayed
       
-      plat.moveTo(500.0f, 200.0f);
-      plat.setSpeed(0,0);
-      plat2.moveTo(200.0f, 400.0f);
-      plat2.setSpeed(0f,0f);
-      scientist.moveTo(500f, 100f);
-      scientist.setSpeed(0f,0f);
+
     }
 
+  }
+
+  public void startLabWorld(){
+      plat1A.moveTo(500.0f, 200.0f);
+      plat1A.setSpeed(0,0);
+      plat1B.moveTo(200.0f, 400.0f);
+      plat1B.setSpeed(0f,0f);
+      scientist.moveTo(500f, 100f);
+      scientist.setSpeed(0f,0f);
   }
 
   public void keyReleased(){
@@ -326,22 +279,6 @@ public class Game extends PApplet{
     // Display color of pixel clicked
     int color = p.get(p.mouseX, p.mouseY);
     PColor.printPColor(p, color);
-
-    // if the Screen is a Grid, print grid coordinate clicked
-    if(currentScreen instanceof Grid){
-      System.out.println("Grid location --> " + ((Grid) currentScreen).getGridLocation());
-    }
-
-    // if the Screen is a Grid, "mark" the grid coordinate to track the state of the Grid
-    if(currentScreen instanceof Grid){
-      ((Grid) currentScreen).setMark("X",((Grid) currentScreen).getGridLocation());
-    }
-
-    // what to do if clicked? (ex. assign a new location to piece1)
-    if(currentScreen == grid1){
-      piece1Row = grid1.getGridLocation().getRow();
-      piece1Col = grid1.getGridLocation().getCol();
-    }
     
 
   }
@@ -380,48 +317,25 @@ public class Game extends PApplet{
       // Change the screen to level 1 between 3 and 5 seconds
       if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
         currentScreen = labWorld;
+        startLabWorld();
       }
     }
 
-    // UPDATE: grid1 Screen
-    if(currentScreen == grid1){
-
-      // Print a '1' in console when level1
-      System.out.print("1");
-
-      // Displays the piece1 image
-      GridLocation piece1Loc = new GridLocation(piece1Row,piece1Col);
-      grid1.setTileImage(piece1Loc, piece1);
-
-      // Displays the player2 image
-      GridLocation scientistLoc = new GridLocation(scientistRow, scientistCol);
-      grid1.setTileSprite(scientistLoc, scientist);
-
-      // Moves to next level based on a button click
-      // b1.show();
-      if(b1.isClicked()){
-        System.out.println("\nButton Clicked");
-        currentScreen = skyWorld;
-      }
-    
-    }
-    
-    // UPDATE: skyWorld Screen
-    if(currentScreen == skyWorld){
-
-      // Print a '2' in console when skyWorld
-      System.out.print("2");
-
-      // Set speed of moving skyWorld background
-      skyWorld.moveBgXY(-0.3f, 0f);
-
-    }
 
     // UPDATE: labWorld Screen
     if(currentScreen == labWorld){
 
       // Print a '3 in console when labWorld
       System.out.print("3");
+
+      if(scientist.isOverlapping(portal1)){
+        currentScreen = caveWorld;
+        scientist.moveTo(200,100);
+        labWorld.addSprite(plat1A);   
+        labWorld.addSprite(scientist);
+        labWorld.addSprite(plat1B);
+      }
+
 
 
     }
@@ -516,17 +430,17 @@ public class Game extends PApplet{
     //   scientist.startGravity();
     // }
 
-    if(scientist.isTouchingLeft(plat)){
+    if(scientist.isTouchingLeft(plat1A)){
       System.out.println("left");
       scientist.move(-30f,0f);
     }
 
-    if(scientist.isTouchingRight(plat)){
+    if(scientist.isTouchingRight(plat1A)){
       System.out.println("right");
       scientist.move(30f, 0f);
     }
 
-    if(scientist.isTouchingBottom(plat)){
+    if(scientist.isTouchingBottom(plat1A)){
       scientist.move(0f,3f);
       scientist.setAccelerationY(0f);
       scientist.setSpeedY(0f);
@@ -541,7 +455,7 @@ public class Game extends PApplet{
     //   scientist.startGravity();
     // }
 
-    if(scientist.isTouchingBottom(plat2)){
+    if(scientist.isTouchingBottom(plat1B)){
       scientist.move(0f,3f);
       scientist.setAccelerationY(0f);
       scientist.setSpeedY(0f);
