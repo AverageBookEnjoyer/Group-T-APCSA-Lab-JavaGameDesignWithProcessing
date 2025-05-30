@@ -1,8 +1,8 @@
 /* World Class - Used to describe the screen of a pixel-based game
  * Subclass of a Screen, includes an ArrayList of Sprite objects
  * Authors: Joel Bianchi, Nathan Santos, Clive Sherwood, Vanessa Balbuena
- * Last Edit: 5/20/25
- * Added gravity to World
+ * Last Edit: 5/29/25
+ * Added getColliders() method
  */
 
 import java.util.ArrayList;
@@ -37,6 +37,7 @@ public class World extends Screen{
     System.out.println("World " + name + " constructed with " + movingBgFile);
   }
 
+  
   // World Constructor #5: Creates a World with a moving background.  (not working!)
   // public World(PApplet p, String name, PImage movingBg, float scale, float x, float y) {
   //   super(p, name, movingBg, scale, x, y);
@@ -46,7 +47,9 @@ public class World extends Screen{
 
   //------------------ WORLD SPRITE METHODS --------------------//
   
-  // Returns an ArrayList of all Sprites in the World
+  /**
+   * @return ArrayList<Sprite>   all Sprites added to the World
+   */
   public ArrayList<Sprite> getSprites(){
       return sprites;
   }
@@ -151,6 +154,27 @@ public class World extends Screen{
   public void printSprites(){
     printWorldSprites();
   }
+
+  
+  /** 
+   * Checks all Sprites for collisions with one specific Sprite
+   * @param checkSprite         Sprite to compare all others to
+   * @return ArrayList<Sprite>  all the Sprites that are currently colliding with a specific Sprite
+   */
+  protected ArrayList<Sprite> getColliders(Sprite checkSprite) {
+		
+    ArrayList<Sprite> collidingSprites = new ArrayList<Sprite>(); 
+
+		for (Sprite otherSprite : this.getSprites()) {
+      if (otherSprite != checkSprite
+        && otherSprite.isSolid()
+        && checkSprite.isOverlapping(otherSprite)
+      ){
+        collidingSprites.add(otherSprite);
+      }
+		}
+    return collidingSprites;
+	}
 
 
   //------------------ WORLD MUTATOR METHODS --------------------//

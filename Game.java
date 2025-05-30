@@ -11,6 +11,7 @@
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import java.util.ArrayList;
 
 public class Game extends PApplet{
 
@@ -167,7 +168,7 @@ public class Game extends PApplet{
     plat.stopGravity(); 
     plat2 = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
     plat2.setOutlineColor(PColor.BLACK);
-    plat.stopGravity();
+    plat2.stopGravity();
     labWorld.addSprite(plat);   
     labWorld.addSprite(scientist);
     labWorld.addSprite(plat2);
@@ -378,7 +379,7 @@ public class Game extends PApplet{
 
       // Change the screen to level 1 between 3 and 5 seconds
       if(splashScreen.getScreenTime() > 3000 && splashScreen.getScreenTime() < 5000){
-        currentScreen = grid1;
+        currentScreen = labWorld;
       }
     }
 
@@ -492,11 +493,28 @@ public class Game extends PApplet{
   // Checks if there is a collision between Sprites on the Screen
   public boolean checkCollision(){
 
-    if(scientist.isTouchingTop(plat)){
-      scientist.stopGravity();
-    } else {
-      scientist.startGravity();
+    ArrayList<Sprite> colliders = this.labWorld.getColliders(scientist);
+
+    for( Sprite collider : colliders){
+
+      if(collider instanceof Platform
+        && scientist.isTouchingTop(collider)
+      ){
+        // System.out.println("TOP" + scientist);
+        scientist.setBottom(collider.getTop());
+        scientist.stopGravity();
+      } else {
+        scientist.startGravity();
+      }
     }
+
+
+    // if(scientist.isTouchingTop(plat)){
+    //   System.out.println("TOP" + scientist);
+    //   scientist.stopGravity();
+    // } else {
+    //   scientist.startGravity();
+    // }
 
     if(scientist.isTouchingLeft(plat)){
       System.out.println("left");
@@ -515,11 +533,13 @@ public class Game extends PApplet{
       scientist.startGravity();
     }
 
-    if(scientist.isTouchingTop(plat2)){
-      scientist.stopGravity();
-    } else {
-      scientist.startGravity();
-    }
+
+    // if(scientist.isTouchingTop(plat2)){
+    //   System.out.println("TOP" + scientist);
+    //   scientist.stopGravity();
+    // } else {
+    //   scientist.startGravity();
+    // }
 
     if(scientist.isTouchingBottom(plat2)){
       scientist.move(0f,3f);
