@@ -1,3 +1,9 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
+import java.util.ArrayList;
+
 /** 
  * Animated Sprite class - useful to have Sprites move around
  * Designed to be used with Spritesheets & JSON Array files from TexturePacker software: 
@@ -9,14 +15,6 @@
  * @version 5/8/25
  * Updated to Java version
  */
-
-import processing.core.PApplet;
-import processing.core.PImage;
-import processing.data.JSONArray;
-import processing.data.JSONObject;
-import java.util.ArrayList;
-
- 
 public class AnimatedSprite extends Sprite{
 
   private String pngFile;

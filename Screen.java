@@ -1,3 +1,6 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
 /**
  * Screen class - a high level class that handles background screens & millisecond timing
  * Has a World Subclass
@@ -6,11 +9,6 @@
  * @version 5/29/25
  * updated formatting for javadoc
  */
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
-
 public class Screen{
 
     PApplet p;

@@ -1,3 +1,6 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
 /** 
  * Grid Class - Used for rectangular-tiled games
  * A 2D array of GridTiles which can be marked
@@ -8,11 +11,6 @@
  * setAllMarks() method that can take in a 2D array of Strings
  * added javadoc formatting
  */
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
-
 public class Grid extends World{
   
   //------------------ GRID FIELDS --------------------//

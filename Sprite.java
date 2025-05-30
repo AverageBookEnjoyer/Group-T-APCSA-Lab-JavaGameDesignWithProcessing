@@ -1,3 +1,6 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
 /** 
  * Sprite class - to create objects that move around with their own properties
  * Inspired by Daniel Shiffman's p5js Animated Sprite tutorial
@@ -10,11 +13,6 @@
  * Added isTouchingTop(), isTouchingBottom(), isTouchingRight(), and isTouchingLeft() methods
  * Added isSolid property to Sprites
  */
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
-
 public class Sprite{
 
   public PApplet p;

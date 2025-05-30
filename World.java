@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import processing.core.PApplet;
+import processing.core.PImage;
+
 /** 
  * World Class - Used to describe the screen of a pixel-based game
  * Subclass of a Screen, includes an ArrayList of Sprite objects
@@ -9,12 +13,6 @@
  * Added getColliders() method
  * Added javadoc formatting
  */
-
-import java.util.ArrayList;
-import processing.core.PApplet;
-import processing.core.PImage;
-
-
 public class World extends Screen{
 
   //------------------ WORLD FIELDS --------------------//
