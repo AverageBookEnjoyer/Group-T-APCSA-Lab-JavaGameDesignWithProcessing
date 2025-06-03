@@ -52,7 +52,7 @@ public class Game extends PApplet{
   // VARIABLES: caveWorld
   World caveWorld;
   PImage caveWorldBg;
-  String caveWorldBgFile = "";
+  String caveWorldBgFile = "images/caveWorld.png";
   Platform plat2A;
   Platform plat2B;
 
@@ -94,18 +94,21 @@ public class Game extends PApplet{
     //SETUP: Load BG images used in all screens
     splashBg = p.loadImage(splashBgFile);
     labWorldBg = loadImage(labWorldBgFile);
+    caveWorldBg = p.loadImage(caveWorldBgFile);
 
     endBg = p.loadImage(endBgFile);
 
     //SETUP: If non-moving, Resize all BG images to exactly match the screen size
     splashBg.resize(p.width, p.height);
     labWorldBg.resize(p.width, p.height);
+    caveWorldBg.resize(p.width, p.height);
 
     endBg.resize(p.width, p.height);   
 
     //SETUP: Construct each Screen, World, Grid
     splashScreen = new Screen(p, "splash", splashBg);
     labWorld = new World(p,"platformer", labWorldBg);
+    caveWorld = new World(p, "cave", caveWorldBg);
 
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
@@ -131,7 +134,7 @@ public class Game extends PApplet{
     labWorld.addSprite(scientist);
     labWorld.addSprite(plat1B);
     labWorld.addSprite(portal1);
-    System.out.println("Done loading Level 3 (labWorld)...");
+    System.out.println("Done loading Level 1 (labWorld)...");
 
 
 
@@ -240,7 +243,7 @@ public class Game extends PApplet{
     } else if(p.key == '2'){
       currentScreen = caveWorld;
     } else if(p.key == '3'){
-      currentScreen = null;
+      currentScreen = caveWorld;
 
       //reset the moving Platform every time the Screen is re-displayed
       
@@ -325,8 +328,8 @@ public class Game extends PApplet{
     // UPDATE: labWorld Screen
     if(currentScreen == labWorld){
 
-      // Print a '3 in console when labWorld
-      System.out.print("3");
+      // Print a "1" in console when labWorld
+      System.out.print("1");
 
       if(scientist.isOverlapping(portal1)){
         currentScreen = caveWorld;
