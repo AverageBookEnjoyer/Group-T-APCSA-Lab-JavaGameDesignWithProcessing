@@ -128,7 +128,7 @@ public class Game extends PApplet{
     plat1B = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
     plat1B.setOutlineColor(PColor.BLACK);
     plat1B.stopGravity();
-    portal1 = new Sprite(p, "images/o_gold.png",1.0f,200,420);
+    portal1 = new Sprite(p, "images/portal.png",1.0f,200,420);
 
     labWorld.addSprite(plat1A);   
     labWorld.addSprite(scientist);
