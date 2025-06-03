@@ -55,6 +55,7 @@ public class Game extends PApplet{
   String caveWorldBgFile = "images/caveWorld.png";
   Platform plat2A;
   Platform plat2B;
+  Sprite portal2;
 
 
   // VARIABLES: endScreen
@@ -136,7 +137,21 @@ public class Game extends PApplet{
     labWorld.addSprite(portal1);
     System.out.println("Done loading Level 1 (labWorld)...");
 
+    //SETUP: caveWorld objects
+    plat2A = new Platform(p, PColor.GRAY, 700.0f, 200.0f, 100.0f, 10.0f);
+    plat2A.setOutlineColor(PColor.BLACK);
+    plat2A.stopGravity();
+    plat2B = new Platform(p, PColor.GRAY, 600.0f, 300.0f, 100.0f, 10.0f);
+    plat2B.setOutlineColor(PColor.BLACK);
+    plat2B.stopGravity();
+    portal2 = new Sprite(p, "images/portal.png",1.0f,300,520);
 
+    caveWorld.addSprite(plat2A);   
+    caveWorld.addSprite(scientist);
+    caveWorld.addSprite(plat2B);
+    caveWorld.addSprite(portal2);
+
+    System.out.println("Done loading level 2 (caveWorld)...");
 
     //SETUP: Sound
     // Load a soundfile from the sounds folder of the sketch and play it back
@@ -204,8 +219,10 @@ public class Game extends PApplet{
       System.out.println("doAnimation: " + doAnimation);
     }
 
-    //-------------------- KEYS FOR LEVEL 3 --------------------
-    if(currentScreen == labWorld){
+    //-------------------- KEYS FOR GENERAL GAMEPLAY --------------------
+
+    //update this according to which levels are part of the general jumping around
+    if(currentScreen == labWorld || currentScreen == caveWorld){
       
       if(p.key == 'q'){
         System.out.println("stopping");
@@ -243,7 +260,7 @@ public class Game extends PApplet{
     } else if(p.key == '2'){
       currentScreen = caveWorld;
     } else if(p.key == '3'){
-      currentScreen = caveWorld;
+      currentScreen = null;
 
       //reset the moving Platform every time the Screen is re-displayed
       
@@ -253,10 +270,10 @@ public class Game extends PApplet{
   }
 
   public void startLabWorld(){
-      plat1A.moveTo(500.0f, 200.0f);
-      plat1A.setSpeed(0,0);
-      plat1B.moveTo(200.0f, 400.0f);
-      plat1B.setSpeed(0f,0f);
+      // plat1A.moveTo(500.0f, 200.0f);
+      // plat1A.setSpeed(0,0);
+      // plat1B.moveTo(200.0f, 400.0f);
+      // plat1B.setSpeed(0f,0f);
       scientist.moveTo(500f, 100f);
       scientist.setSpeed(0f,0f);
   }
@@ -333,14 +350,18 @@ public class Game extends PApplet{
 
       if(scientist.isOverlapping(portal1)){
         currentScreen = caveWorld;
-        scientist.moveTo(200,100);
-        labWorld.addSprite(plat1A);   
-        labWorld.addSprite(scientist);
-        labWorld.addSprite(plat1B);
+        // scientist.moveTo(200,100);
+        // caveWorld.addSprite(plat2A);   
+        // caveWorld.addSprite(scientist);
+        //caveWorld.addSprite(plat2B);
       }
 
 
 
+    }
+
+    if(currentScreen == caveWorld){
+      
     }
 
     // UPDATE: End Screen
