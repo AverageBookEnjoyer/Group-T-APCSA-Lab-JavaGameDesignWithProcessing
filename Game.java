@@ -123,10 +123,10 @@ public class Game extends PApplet{
     System.out.println("Done loading Scientist stuff...");
     
     // SETUP: Setup more labWorld objects
-    plat1A = new Platform(p, PColor.MAGENTA, 500.0f, 200.0f, 200.0f, 20.0f);
+    plat1A = new Platform(p, PColor.MAGENTA, 0.0f, 0.0f, 200.0f, 20.0f);
     plat1A.setOutlineColor(PColor.BLACK);
     plat1A.stopGravity(); 
-    plat1B = new Platform(p, PColor.CYAN, 400.0f, 300.0f, 200.0f, 20.0f);
+    plat1B = new Platform(p, PColor.CYAN, 0.0f, 0.0f, 200.0f, 20.0f);
     plat1B.setOutlineColor(PColor.BLACK);
     plat1B.stopGravity();
     portal1 = new Sprite(p, "images/portal.png",1.0f,200,420);
@@ -138,10 +138,10 @@ public class Game extends PApplet{
     System.out.println("Done loading Level 1 (labWorld)...");
 
     //SETUP: caveWorld objects
-    plat2A = new Platform(p, PColor.GRAY, 700.0f, 200.0f, 100.0f, 10.0f);
+    plat2A = new Platform(p, PColor.GRAY, 0.0f, 0.0f, 100.0f, 10.0f);
     plat2A.setOutlineColor(PColor.BLACK);
     plat2A.stopGravity();
-    plat2B = new Platform(p, PColor.GRAY, 600.0f, 300.0f, 100.0f, 10.0f);
+    plat2B = new Platform(p, PColor.GRAY, 0.0f, 0.0f, 100.0f, 10.0f);
     plat2B.setOutlineColor(PColor.BLACK);
     plat2B.stopGravity();
     portal2 = new Sprite(p, "images/portal.png",1.0f,300,520);
@@ -259,6 +259,8 @@ public class Game extends PApplet{
 
     } else if(p.key == '2'){
       currentScreen = caveWorld;
+      startCaveWorld();
+
     } else if(p.key == '3'){
       currentScreen = null;
 
@@ -270,10 +272,21 @@ public class Game extends PApplet{
   }
 
   public void startLabWorld(){
-      // plat1A.moveTo(500.0f, 200.0f);
-      // plat1A.setSpeed(0,0);
-      // plat1B.moveTo(200.0f, 400.0f);
-      // plat1B.setSpeed(0f,0f);
+      problemBeGone();
+      plat1A.moveTo(500.0f, 200.0f);
+      plat1A.setSpeed(0,0);
+      plat1B.moveTo(200.0f, 400.0f);
+      plat1B.setSpeed(0f,0f);
+      scientist.moveTo(500f, 100f);
+      scientist.setSpeed(0f,0f);
+  }
+
+  public void startCaveWorld(){
+      problemBeGone();
+      plat2A.moveTo(300.0f, 200.0f);
+      plat2A.setSpeed(0,0);
+      plat2B.moveTo(100.0f, 400.0f);
+      plat2B.setSpeed(0f,0f);
       scientist.moveTo(500f, 100f);
       scientist.setSpeed(0f,0f);
   }
@@ -306,6 +319,15 @@ public class Game extends PApplet{
 
 
   //------------------ CUSTOM  GAME METHODS --------------------//
+
+  //Temporary solution to platfroms staying to long
+  //Will need to update it for each object added
+  public void problemBeGone(){
+      plat1A.moveTo(-200.0f, -200.0f);
+      plat1B.moveTo(-200.0f, -200.0f);
+      plat2A.moveTo(-200.0f, -200.0f);
+      plat2B.moveTo(-200.0f, -200.0f);
+  }
 
   // Updates the title bar of the Game
   public void updateTitleBar(){
@@ -349,11 +371,8 @@ public class Game extends PApplet{
       System.out.print("1");
 
       if(scientist.isOverlapping(portal1)){
-        currentScreen = caveWorld;
-        // scientist.moveTo(200,100);
-        // caveWorld.addSprite(plat2A);   
-        // caveWorld.addSprite(scientist);
-        //caveWorld.addSprite(plat2B);
+        startCaveWorld();
+        // // scientist.moveTo(200,100);
       }
 
 
