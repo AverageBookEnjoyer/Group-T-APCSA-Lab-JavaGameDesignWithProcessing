@@ -371,17 +371,21 @@ public class Game extends PApplet{
       System.out.print("1");
 
       if(scientist.isOverlapping(portal1)){
+        currentScreen = caveWorld;
         startCaveWorld();
-        // // scientist.moveTo(200,100);
+        scientist.moveTo(200,100);
       }
 
 
 
     }
 
-    if(currentScreen == caveWorld){
-      
-    }
+    // if(currentScreen == caveWorld){
+    //   if(scientist.isOverlapping(portal1)){
+    //     startLabWorld();
+    //     scientist.moveTo(200,100);
+    //   }
+    // }
 
     // UPDATE: End Screen
     // if(currentScreen == endScreen){
