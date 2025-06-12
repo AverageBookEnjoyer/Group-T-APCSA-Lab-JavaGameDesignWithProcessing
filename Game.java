@@ -135,6 +135,7 @@ public class Game extends PApplet{
     labWorld.addSprite(scientist);
     labWorld.addSprite(plat1B);
     labWorld.addSprite(portal1);
+
     System.out.println("Done loading Level 1 (labWorld)...");
 
     //SETUP: caveWorld objects
@@ -275,6 +276,7 @@ public class Game extends PApplet{
       problemBeGone();
       plat1A.moveTo(500.0f, 200.0f);
       plat1B.moveTo(200.0f, 400.0f);
+      portal1.moveTo(200.0f, 400.0f);
       scientist.moveTo(500f, 100f);
       scientist.setAccelerationY(0f);
       scientist.setSpeed(0f,0f);
@@ -285,6 +287,7 @@ public class Game extends PApplet{
       problemBeGone();
       plat2A.moveTo(300.0f, 200.0f);
       plat2B.moveTo(100.0f, 400.0f);
+      portal2.moveTo(200.0f, 200.0f);
       scientist.moveTo(500f, 100f);
       scientist.setAccelerationY(0f);
       scientist.setSpeed(0f,0f);
@@ -323,10 +326,16 @@ public class Game extends PApplet{
   //Temporary solution to platfroms staying to long
   //Will need to update it for each object added
   public void problemBeGone(){
+
+      //labWorld assets
       plat1A.moveTo(-200.0f, -200.0f);
       plat1B.moveTo(-200.0f, -200.0f);
+      portal1.moveTo(-200.0f, -200.0f);
+
+      //caveWorld assets
       plat2A.moveTo(-200.0f, -200.0f);
       plat2B.moveTo(-200.0f, -200.0f);
+      portal2.moveTo(-200.0f, -200.0f);
   }
 
   // Updates the title bar of the Game
