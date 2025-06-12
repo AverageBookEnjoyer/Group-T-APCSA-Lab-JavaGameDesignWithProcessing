@@ -60,7 +60,7 @@ public class Game extends PApplet{
   // Variables: Forest
   World woodWorld;
   PImage woodWorldBg;
-  String woodWorldBgFile = "images/caveWorld.png";
+  String woodWorldBgFile = "images/woodWorld.png";
   Platform plat3A;
   Platform plat3B;
   Sprite portal3;
@@ -68,7 +68,7 @@ public class Game extends PApplet{
   // Variables: Factory
   World factoryWorld;
   PImage factoryWorldBg;
-  String factoryWorldBgFile = "images/caveWorld.png";
+  String factoryWorldBgFile = "images/factoryWorld.png";
   Platform plat4A;
   Platform plat4B;
   Sprite portal4;
@@ -76,7 +76,7 @@ public class Game extends PApplet{
    // Variables: swer
   World swerWorld;
   PImage swerWorldBg;
-  String swerWorldBgFile = "images/caveWorld.png";
+  String swerWorldBgFile = "images/swerWorld.png";
   Platform plat5A;
   Platform plat5B;
   Sprite portal5;
@@ -84,7 +84,7 @@ public class Game extends PApplet{
    // Variables: Exparimental Lab
   World exLabWorld;
   PImage exLabWorldBg;
-  String exLabWorldBgFile = "images/caveWorld.png";
+  String exLabWorldBgFile = "images/exLabWorld.png";
   Platform plat6A;
   Platform plat6B;
   Sprite portal6;
@@ -92,7 +92,7 @@ public class Game extends PApplet{
   // Variables: city
   World cityWorld;
   PImage cityWorldBg;
-  String cityWorldBgFile = "images/caveWorld.png";
+  String cityWorldBgFile = "images/cityWorld.png";
   Platform plat7A;
   Platform plat7B;
   Sprite portal7;
@@ -100,7 +100,7 @@ public class Game extends PApplet{
   // Variables: space
   World spaceWorld;
   PImage spaceWorldBg;
-  String spaceWorldBgFile = "images/caveWorld.png";
+  String spaceWorldBgFile = "images/spaceWorld.png";
   Platform plat8A;
   Platform plat8B;
   Sprite portal8;
@@ -108,7 +108,7 @@ public class Game extends PApplet{
   // Variables: moon
   World moonWorld;
   PImage moonWorldBg;
-  String moonWorldBgFile = "images/caveWorld.png";
+  String moonWorldBgFile = "images/moonWorld.png";
   Platform plat9A;
   Platform plat9B;
   Sprite portal9;
@@ -116,15 +116,15 @@ public class Game extends PApplet{
 // Variables: sky
   World skyWorld;
   PImage skyWorldBg;
-  String skyWorldBgFile = "images/caveWorld.png";
+  String skyWorldBgFile = "images/skyWorld.png";
   Platform plat10A;
   Platform plat10B;
   Sprite portal10;
 
   // Variables: moon lab
-  World moonlabWorld;
-  PImage moonlabWorldBg;
-  String moonlabWorldBgFile = "images/caveWorld.png";
+  World moonLabWorld;
+  PImage moonLabWorldBg;
+  String moonLabWorldBgFile = "images/moonLabWorld.png";
   Platform plat11A;
   Platform plat11B;
   Sprite portal11;
@@ -181,7 +181,15 @@ public class Game extends PApplet{
     splashScreen = new Screen(p, "splash", splashBg);
     labWorld = new World(p,"platformer", labWorldBg);
     caveWorld = new World(p, "cave", caveWorldBg);
-    
+    woodWorld = new World(p, "wood", woodWorldBg);
+    factoryWorld = new World(p, "factory", factoryWorldBg);
+    cityWorld = new World(p, "city", cityWorldBg);
+    swerWorld = new World(p, "swer", swerWorldBg);
+    exLabWorld = new World(p, "Exparimental Lab", exLabWorldBg);
+    skyWorld = new World(p, "sky", skyWorldBg);
+    moonWorld = new World(p, "moon", moonWorldBg);
+    moonLabWorld = new World(p, "moon Lab", moonLabWorldBg);
+    spaceWorld = new World(p, "space", spaceWorldBg);
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
