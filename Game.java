@@ -169,10 +169,9 @@ public class Game extends PApplet{
     caveWorldBg = p.loadImage(caveWorldBgFile);
     exLabWorldBg = p.loadImage(exLabWorldBgFile);
     factoryWorldBg = p.loadImage(factoryWorldBgFile);
-    moonlabWorldBg = p.loadImage(moonWorldBgFile);
+    moonLabWorldBg = p.loadImage(moonWorldBgFile);
     moonWorldBg = p.loadImage(moonWorldBgFile);
     cityWorldBg = p.loadImage(cityWorldBgFile);
-    
 
     endBg = p.loadImage(endBgFile);
 
@@ -180,6 +179,7 @@ public class Game extends PApplet{
     splashBg.resize(p.width, p.height);
     labWorldBg.resize(p.width, p.height);
     caveWorldBg.resize(p.width, p.height);
+    
 
     endBg.resize(p.width, p.height);   
 
@@ -196,6 +196,7 @@ public class Game extends PApplet{
     moonWorld = new World(p, "moon", moonWorldBg);
     moonLabWorld = new World(p, "moon Lab", moonLabWorldBg);
     spaceWorld = new World(p, "space", spaceWorldBg);
+    
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
