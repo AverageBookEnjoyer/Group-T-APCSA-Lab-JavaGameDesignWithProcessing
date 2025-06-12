@@ -167,6 +167,12 @@ public class Game extends PApplet{
     splashBg = p.loadImage(splashBgFile);
     labWorldBg = loadImage(labWorldBgFile);
     caveWorldBg = p.loadImage(caveWorldBgFile);
+    exLabWorldBg = p.loadImage(exLabWorldBgFile);
+    factoryWorldBg = p.loadImage(factoryWorldBgFile);
+    moonlabWorldBg = p.loadImage(moonWorldBgFile);
+    moonWorldBg = p.loadImage(moonWorldBgFile);
+    cityWorldBg = p.loadImage(cityWorldBgFile);
+    
 
     endBg = p.loadImage(endBgFile);
 
