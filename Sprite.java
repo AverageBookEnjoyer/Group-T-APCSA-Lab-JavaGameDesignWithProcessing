@@ -7,11 +7,12 @@ import processing.core.PImage;
  * Note: Picture coordinate origina at top, left corner
  * @author Joel A Bianchi
  * @author Marcus Bistline
- * @version 5/29/25
+ * @version 6/12/25
  * updated formatting for javadoc
  * Added isOverlapping() method
  * Added isTouchingTop(), isTouchingBottom(), isTouchingRight(), and isTouchingLeft() methods
  * Added isSolid property to Sprites
+ * Added allHit()
  */
 public class Sprite{
 
@@ -489,6 +490,36 @@ public class Sprite{
 		return false;
 	}
 
+    /** 
+   * A short cut to utilize all of the collision methods in one
+   * @param otherSprite   second Sprite to compare this Sprite with
+   */
+  public void allHit(Sprite otherSpirte){
+
+  if(isTouchingLeft(otherSpirte)){
+    System.out.println("left");
+    move(-30f,0f);
+  }
+
+  if(isTouchingRight(otherSpirte)){
+    System.out.println("right");
+    move(30f, 0f);
+  }
+
+  if(isTouchingTop(otherSpirte)){
+    move(0f,-1f);
+    setAccelerationY(0f);
+    setSpeedY(0f);
+    startGravity();
+  }
+
+  if(isTouchingBottom(otherSpirte)){
+    move(0f,3f);
+    setAccelerationY(0f);
+    setSpeedY(0f);
+    startGravity();
+  }
+}
   
   //------------------ SPRITE COORDINATES ACCESSOR & MUTATOR METHODS --------------------//
   

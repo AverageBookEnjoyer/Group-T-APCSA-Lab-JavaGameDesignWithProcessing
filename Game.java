@@ -206,6 +206,7 @@ public class Game extends PApplet{
     labWorld.addSprite(scientist);
     labWorld.addSprite(plat1B);
     labWorld.addSprite(portal1);
+
     System.out.println("Done loading Level 1 (labWorld)...");
 
     //SETUP: caveWorld objects
@@ -345,21 +346,23 @@ public class Game extends PApplet{
   public void startLabWorld(){
       problemBeGone();
       plat1A.moveTo(500.0f, 200.0f);
-      plat1A.setSpeed(0,0);
       plat1B.moveTo(200.0f, 400.0f);
-      plat1B.setSpeed(0f,0f);
+      portal1.moveTo(200.0f, 400.0f);
       scientist.moveTo(500f, 100f);
+      scientist.setAccelerationY(0f);
       scientist.setSpeed(0f,0f);
+      
   }
 
   public void startCaveWorld(){
       problemBeGone();
       plat2A.moveTo(300.0f, 200.0f);
-      plat2A.setSpeed(0,0);
       plat2B.moveTo(100.0f, 400.0f);
-      plat2B.setSpeed(0f,0f);
+      portal2.moveTo(200.0f, 200.0f);
       scientist.moveTo(500f, 100f);
+      scientist.setAccelerationY(0f);
       scientist.setSpeed(0f,0f);
+      
   }
 
   public void keyReleased(){
@@ -394,10 +397,16 @@ public class Game extends PApplet{
   //Temporary solution to platfroms staying to long
   //Will need to update it for each object added
   public void problemBeGone(){
+
+      //labWorld assets
       plat1A.moveTo(-200.0f, -200.0f);
       plat1B.moveTo(-200.0f, -200.0f);
+      portal1.moveTo(-200.0f, -200.0f);
+
+      //caveWorld assets
       plat2A.moveTo(-200.0f, -200.0f);
       plat2B.moveTo(-200.0f, -200.0f);
+      portal2.moveTo(-200.0f, -200.0f);
   }
 
   // Updates the title bar of the Game
@@ -444,7 +453,6 @@ public class Game extends PApplet{
       if(scientist.isOverlapping(portal1)){
         currentScreen = caveWorld;
         startCaveWorld();
-        scientist.moveTo(200,100);
       }
 
 
@@ -539,69 +547,17 @@ public class Game extends PApplet{
         scientist.startGravity();
       }
     }
+    
+    //This is how you make the scientist interact with ANY platforms in the game (MUST add each new platform);
+    scientist.allHit(plat1A);
+    scientist.allHit(plat1B);
+    scientist.allHit(plat2A);
+    scientist.allHit(plat2B);
 
 
-    // if(scientist.isTouchingTop(plat)){
-    //   System.out.println("TOP" + scientist);
-    //   scientist.stopGravity();
-    // } else {
-    //   scientist.startGravity();
-    // }
-
-    if(scientist.isTouchingLeft(plat1A)){
-      System.out.println("left");
-      scientist.move(-30f,0f);
-    }
-
-    if(scientist.isTouchingRight(plat1A)){
-      System.out.println("right");
-      scientist.move(30f, 0f);
-    }
-
-    if(scientist.isTouchingBottom(plat1A)){
-      scientist.move(0f,3f);
-      scientist.setAccelerationY(0f);
-      scientist.setSpeedY(0f);
-      scientist.startGravity();
-    }
-
-
-    // if(scientist.isTouchingTop(plat2)){
-    //   System.out.println("TOP" + scientist);
-    //   scientist.stopGravity();
-    // } else {
-    //   scientist.startGravity();
-    // }
-
-    if(scientist.isTouchingBottom(plat1B)){
-      scientist.move(0f,3f);
-      scientist.setAccelerationY(0f);
-      scientist.setSpeedY(0f);
-      scientist.startGravity();
-    }
-
-
-
-    //Check what image/sprite is stored in the CURRENT location
-    // PImage image = grid.getTileImage(loc);
-    // AnimatedSprite sprite = grid.getTileSprite(loc);
-
-    //if empty --> no collision
-
-    //Check what image/sprite is stored in the NEXT location
-
-    //if empty --> no collision
-
-    //check if enemy runs into player
-
-      //clear out the enemy if it hits the player (using cleartTileImage() or clearTileSprite() from Grid class)
-
-      //Update status variable
-
-    //check if a player collides into enemy
-
-    return false; //<--default return
+    return false;
   }
+
 
   // Indicates when the main game is over
   public boolean isGameOver(){
