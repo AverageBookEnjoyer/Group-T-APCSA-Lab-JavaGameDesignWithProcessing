@@ -57,7 +57,78 @@ public class Game extends PApplet{
   Platform plat2B;
   Sprite portal2;
 
+  // Variables: Forest
+  World woodWorld;
+  PImage woodWorldBg;
+  String woodWorldBgFile = "images/caveWorld.png";
+  Platform plat3A;
+  Platform plat3B;
+  Sprite portal3;
 
+  // Variables: Factory
+  World factoryWorld;
+  PImage factoryWorldBg;
+  String factoryWorldBgFile = "images/caveWorld.png";
+  Platform plat4A;
+  Platform plat4B;
+  Sprite portal4;
+
+   // Variables: swer
+  World swerWorld;
+  PImage swerWorldBg;
+  String swerWorldBgFile = "images/caveWorld.png";
+  Platform plat5A;
+  Platform plat5B;
+  Sprite portal5;
+
+   // Variables: Exparimental Lab
+  World exLabWorld;
+  PImage exLabWorldBg;
+  String exLabWorldBgFile = "images/caveWorld.png";
+  Platform plat6A;
+  Platform plat6B;
+  Sprite portal6;
+
+  // Variables: city
+  World cityWorld;
+  PImage cityWorldBg;
+  String cityWorldBgFile = "images/caveWorld.png";
+  Platform plat7A;
+  Platform plat7B;
+  Sprite portal7;
+
+  // Variables: space
+  World spaceWorld;
+  PImage spaceWorldBg;
+  String spaceWorldBgFile = "images/caveWorld.png";
+  Platform plat8A;
+  Platform plat8B;
+  Sprite portal8;
+
+  // Variables: moon
+  World moonWorld;
+  PImage moonWorldBg;
+  String moonWorldBgFile = "images/caveWorld.png";
+  Platform plat9A;
+  Platform plat9B;
+  Sprite portal9;
+
+// Variables: sky
+  World skyWorld;
+  PImage skyWorldBg;
+  String skyWorldBgFile = "images/caveWorld.png";
+  Platform plat10A;
+  Platform plat10B;
+  Sprite portal10;
+
+  // Variables: moon lab
+  World moonlabWorld;
+  PImage moonlabWorldBg;
+  String moonlabWorldBgFile = "images/caveWorld.png";
+  Platform plat11A;
+  Platform plat11B;
+  Sprite portal11;
+  
   // VARIABLES: endScreen
   World endScreen;
   PImage endBg;
@@ -110,7 +181,7 @@ public class Game extends PApplet{
     splashScreen = new Screen(p, "splash", splashBg);
     labWorld = new World(p,"platformer", labWorldBg);
     caveWorld = new World(p, "cave", caveWorldBg);
-
+    
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
