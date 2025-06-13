@@ -43,6 +43,8 @@ public class Game extends PApplet{
   boolean hasBluePotion = false;
   boolean hasRedPotion = false;
   boolean hasGreenPotion = false;
+   boolean canJump = false;
+
 
   //VARIABLES: labWorld Pixel-based Platformer
   World labWorld;
@@ -60,7 +62,7 @@ public class Game extends PApplet{
   Platform plat2B;
   Sprite portal2;
 
-  // Variables: Forest
+  // Variables: Forest NOT USED
   World woodWorld;
   PImage woodWorldBg;
   String woodWorldBgFile = "images/woodWorld.png";
@@ -68,7 +70,7 @@ public class Game extends PApplet{
   Platform plat3B;
   Sprite portal3;
 
-  // Variables: Factory
+  // Variables: Factory NOT USED
   World factoryWorld;
   PImage factoryWorldBg;
   String factoryWorldBgFile = "images/factoryWorld.png";
@@ -100,7 +102,7 @@ public class Game extends PApplet{
   Platform plat7B;
   Sprite portal7;
 
-  // Variables: space
+  // Variables: space NOT USED
   World spaceWorld;
   PImage spaceWorldBg;
   String spaceWorldBgFile = "images/spaceWorld.png";
@@ -108,7 +110,7 @@ public class Game extends PApplet{
   Platform plat8B;
   Sprite portal8;
 
-  // Variables: moon
+  // Variables: moon NOT USED
   World moonWorld;
   PImage moonWorldBg;
   String moonWorldBgFile = "images/moonWorld.png";
@@ -116,7 +118,7 @@ public class Game extends PApplet{
   Platform plat9B;
   Sprite portal9;
 
-// Variables: sky
+// Variables: sky NOT USED
   World skyWorld;
   PImage skyWorldBg;
   String skyWorldBgFile = "images/skyWorld.png";
@@ -124,7 +126,7 @@ public class Game extends PApplet{
   Platform plat10B;
   Sprite portal10;
 
-  // Variables: moon lab
+  // Variables: moon lab NOT USED
   World moonLabWorld;
   PImage moonLabWorldBg;
   String moonLabWorldBgFile = "images/moonLabWorld.png";
@@ -580,7 +582,6 @@ public class Game extends PApplet{
     scientist.allHit(plat1B);
     scientist.allHit(plat2A);
     scientist.allHit(plat2B);
-
 
     return false;
   }
