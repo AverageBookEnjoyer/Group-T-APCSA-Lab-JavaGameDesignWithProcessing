@@ -26,7 +26,7 @@ public class Game extends PApplet{
   String name = "Undefined";
 
   // VARIABLES: Whole Game
-  AnimatedSprite runningHorse;
+ // AnimatedSprite runningHorse;
   boolean doAnimation;
 
   // VARIABLES: splashScreen
@@ -40,6 +40,9 @@ public class Game extends PApplet{
   String scientistFile = "sprites/sci.png";
   String scientistJson = "sprites/sci.json";
   int health = 3;
+  boolean hasBluePotion = false;
+  boolean hasRedPotion = false;
+  boolean hasGreenPotion = false;
 
   //VARIABLES: labWorld Pixel-based Platformer
   World labWorld;
@@ -201,7 +204,7 @@ public class Game extends PApplet{
     currentScreen = splashScreen;
 
     //SETUP: Construct Game objects used in All Screens
-    runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 1.0f);
+  //  runningHorse = new AnimatedSprite(p, "sprites/horse_run.png", "sprites/horse_run.json", 50.0f, 75.0f, 1.0f);
 
     //SETUP: Setup scientist stuff
     scientist = new AnimatedSprite(p, scientistFile, scientistJson, 0.0f, 0.0f, 0.5f);
@@ -432,7 +435,7 @@ public class Game extends PApplet{
       extraText = currentScreen.getName();
 
       //set the title each loop
-      surface.setTitle(titleText + "\t// CurrentScreen: " + extraText + " \t // Name: " + name + "\t // Health: " + health );
+      surface.setTitle(titleText + "\t// CurrentScreen: " + extraText + "\t // Have BP: " + hasBluePotion + "\t // Have RP: " + hasRedPotion + "\t // Have GP: " + hasGreenPotion);
 
       //adjust the extra text as desired
     
@@ -488,7 +491,7 @@ public class Game extends PApplet{
 
     // UPDATE: Any Screen
     if(doAnimation){
-      runningHorse.animateHorizontal(0.5f, 1.0f, true);
+  //    runningHorse.animateHorizontal(0.5f, 1.0f, true);
     }
 
     // UPDATE: Other built-in to current World/Grid/HexGrid
