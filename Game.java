@@ -167,20 +167,30 @@ public class Game extends PApplet{
     splashBg = p.loadImage(splashBgFile);
     labWorldBg = loadImage(labWorldBgFile);
     caveWorldBg = p.loadImage(caveWorldBgFile);
-    exLabWorldBg = p.loadImage(exLabWorldBgFile);
+    woodWorldBg = p.loadImage(woodWorldBgFile);
     factoryWorldBg = p.loadImage(factoryWorldBgFile);
-    moonLabWorldBg = p.loadImage(moonWorldBgFile);
-    moonWorldBg = p.loadImage(moonWorldBgFile);
+    swerWorldBg = p.loadImage(swerWorldBgFile);
     cityWorldBg = p.loadImage(cityWorldBgFile);
-
+    skyWorldBg = p.loadImage(skyWorldBgFile);
+    exLabWorldBg = p.loadImage(exLabWorldBgFile);
+    spaceWorldBg = p.loadImage(spaceWorldBgFile);
+    moonWorldBg = p.loadImage(moonWorldBgFile);
+    moonLabWorldBg = p.loadImage(moonLabWorldBgFile);
     endBg = p.loadImage(endBgFile);
 
     //SETUP: If non-moving, Resize all BG images to exactly match the screen size
     splashBg.resize(p.width, p.height);
     labWorldBg.resize(p.width, p.height);
     caveWorldBg.resize(p.width, p.height);
-    
-
+    woodWorldBg.resize(p.width, p.height); 
+    factoryWorldBg.resize(p.width, p.height); 
+    cityWorldBg.resize(p.width, p.height);
+    swerWorldBg.resize(p.width, p.height);
+    exLabWorldBg.resize(p.width, p.height);
+    skyWorldBg.resize(p.width, p.height);
+    moonWorldBg.resize(p.width, p.height);
+    moonLabWorldBg.resize(p.width, p.height);
+    spaceWorldBg.resize(p.width, p.height);
     endBg.resize(p.width, p.height);   
 
     //SETUP: Construct each Screen, World, Grid
@@ -196,7 +206,6 @@ public class Game extends PApplet{
     moonWorld = new World(p, "moon", moonWorldBg);
     moonLabWorld = new World(p, "moon Lab", moonLabWorldBg);
     spaceWorld = new World(p, "space", spaceWorldBg);
-    
     endScreen = new World(p, "end", endBg);
     currentScreen = splashScreen;
 
