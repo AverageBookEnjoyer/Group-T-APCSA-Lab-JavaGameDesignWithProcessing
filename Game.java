@@ -249,6 +249,21 @@ public class Game extends PApplet{
 
     System.out.println("Done loading level 2 (caveWorld)...");
 
+    // SETUP: forestWorld
+    plat3A = new Platform(p, PColor.GRAY, 0.0f, 0.0f, 400.0f, 10.0f);
+    plat3A.setOutlineColor(PColor.BLACK);
+    plat3A.stopGravity();
+    plat3B = new Platform(p, PColor.GRAY, 0.0f, 0.0f, 270.0f, 10.0f);
+    plat3B.setOutlineColor(PColor.BLACK);
+    plat3B.stopGravity();
+    portal3 = new Sprite(p, "images/portal.png",1.0f,300,520);
+
+    woodWorld.addSprite(plat3A);   
+    woodWorld.addSprite(scientist);
+    woodWorld.addSprite(plat3B);
+    woodWorld.addSprite(portal3);
+    
+
     //SETUP: Sound
     // Load a soundfile from the sounds folder of the sketch and play it back
      //song = new SoundFile(p, "sounds/Lenny_Kravitz_Fly_Away.mp3");
@@ -358,7 +373,7 @@ public class Game extends PApplet{
       startCaveWorld();
 
     } else if(p.key == '3'){
-      currentScreen = null;
+      currentScreen = woodWorld;
 
       //reset the moving Platform every time the Screen is re-displayed
       
@@ -388,6 +403,18 @@ public class Game extends PApplet{
       scientist.setSpeed(0f,0f);
       
   }
+
+  public void startWoodWorld(){
+      problemBeGone();
+      plat3A.moveTo(300.0f, 200.0f);
+      plat3B.moveTo(100.0f, 400.0f);
+      portal3.moveTo(200.0f, 200.0f);
+      scientist.moveTo(500f, 100f);
+      scientist.setAccelerationY(0f);
+      scientist.setSpeed(0f,0f);
+      
+  }
+
 
   public void keyReleased(){
 
@@ -480,6 +507,16 @@ public class Game extends PApplet{
       }
 
 
+
+    }
+
+    if(currentScreen == caveWorld){
+      System.out.print("2");
+
+      if(scientist.isOverlapping(portal2)){
+        currentScreen = woodWorld;
+        startWoodWorld();
+      }
 
     }
 
